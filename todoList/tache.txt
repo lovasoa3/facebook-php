@@ -1,0 +1,15 @@
+1-creer un ficher de publication(publication.php)
+    a-section de publication
+    b-formulaire de pour la publication
+    C-section pour la list de publication
+
+2-creer un ficher pour inserer la pub et afficher la pub(pubResquest.php)
+    a-insert de pub dans la base
+3-creer un ficher pour select la pub(selectPub.php)
+    a-select * pub 
+    b-css pour le pub
+
+
+
+    alea :
+    a-creer une table des membre bloqués

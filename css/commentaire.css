@@ -1,0 +1,43 @@
+section{
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+}
+.container{
+    background-color: blueviolet;
+    height: 95vh;
+}
+.comment{
+    height: 85vh;
+    overflow-y: scroll;
+}
+.containerComment h1{
+    text-align: center;
+    background-color: grey;
+    height: 6vh;
+}
+.itemPub1{
+    width:25vh ;
+    background-color: rgb(210, 208, 208);
+}
+.pText1{
+    margin-left: 3vh;
+    width: 17vh;
+}
+.commentaire{
+    width:80% ;
+}
+#sendCommentaire{
+    width:20% ;
+}
+#formCommentaire{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.h{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}

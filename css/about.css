@@ -1,0 +1,38 @@
+.itemAbout{
+    display: flex;
+    flex-direction: row;
+}
+.ph img{
+    width: 100%;
+    width: 100%;
+}
+
+.containerImg{
+    width:4vw;
+    height:4vw;
+    border-radius: 100%;
+    background-color: black;
+}
+.containerImg img{
+    width: 100%;
+    width: 100%;
+}
+
+.nom{
+    margin-top: 1vh;
+    margin-left: 3vh;
+    font-weight: bold;
+}
+.date{
+    color: rgb(95, 95, 95);
+    margin-left: 3vh;
+    font-size: small;
+    
+}
+.btnChoix{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    margin-left: 2vh;
+
+}

@@ -1,0 +1,41 @@
+body{
+    background-color: rgb(211, 213, 213);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.form{
+    margin: 0 auto;
+    margin-top: 3vh;
+    width: 30vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    gap: 4vh;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    background-color: aliceblue;  
+}
+.form h1{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    margin-bottom: 5vh;
+    margin-top: 5vh;
+}
+.form input{
+    width: 28vw;
+    height: 7vh;
+    margin-bottom: 2vh;
+    outline: none;
+    padding-left: 1vh;
+}
+.form button{
+    width: 10vw;
+    height: 6vh;
+    border-radius: 6px;
+    margin-bottom: 2vh;
+    border: 1px solid white;
+    color: aliceblue;
+    font-weight: bolder;
+    background-color: rgb(0, 0, 255);
+}

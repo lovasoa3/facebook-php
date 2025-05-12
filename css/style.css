@@ -1,0 +1,132 @@
+/* Styles généraux */
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: #1c1e21;
+}
+
+/* Conteneur du formulaire */
+.form1 {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 432px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* En-tête */
+.form1 h1 {
+    color: #1c1e21;
+    font-size: 25px;
+    font-weight: 600;
+    margin: 0 0 10px 0;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dadde1;
+}
+
+/* Éléments du formulaire */
+.item {
+    margin-bottom: 15px;
+}
+
+.item:last-child {
+    margin-bottom: 0;
+}
+
+/* Étiquettes */
+.item label {
+    display: block;
+    font-size: 15px;
+    margin-bottom: 5px;
+    color: #606770;
+    font-weight: normal;
+}
+
+/* Champs de saisie */
+.item input {
+    width: 100%;
+    padding: 11px;
+    font-size: 15px;
+    border: 1px solid #ccd0d5;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #f5f6f7;
+}
+
+.item input:focus {
+    outline: none;
+    border-color: #1877f2;
+    box-shadow: 0 0 0 2px #e7f3ff;
+}
+
+/* Style spécifique pour le champ date */
+.item input[type="date"] {
+    appearance: none;
+    padding: 10px;
+}
+
+/* Bouton */
+.item button {
+    background-color: #00a400;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    height: 36px;
+    overflow: hidden;
+    padding: 0 32px;
+    text-align: center;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.item button:hover {
+    background-color: #008c00;
+}
+
+/* Adaptations responsive */
+@media (max-width: 500px) {
+    .form1 {
+        width: 90%;
+        margin: 20px auto;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f0f2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    color: #1c1e21;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Logo Facebook en arrière-plan */
+
+
+/* Conteneur du formulaire */
