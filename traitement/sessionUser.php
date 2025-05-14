@@ -6,6 +6,7 @@
              $email = $membre['email'];
              $idActif = $membre['idMenbre'];
              $nom =$membre['nom'];
+             $url=$membre['url'];
          }
      }
 ?>

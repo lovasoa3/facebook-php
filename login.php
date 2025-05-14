@@ -12,7 +12,9 @@ if(isset($_POST["emaili"]) && !empty($_POST["emaili"]) &&
             $_SESSION['membre'][$donnee['idMenbre']] = [
                 'idMenbre' => $donnee['idMenbre'],
                 'nom' => $donnee['nom'],
-                'email' => $donnee['email']
+                'email' => $donnee['email'],
+                'url'=> $donnee['url']
+                
             ];
             
             header("location:publication.php");

@@ -65,7 +65,7 @@ $selectDemande=selectMaDemande($idActif,$db)
                     <div class="itemPub">
                         <div class="itemAbout">
                             <div class="containerImg">
-                                <img src="photo\profil.png" alt="">
+                                <img src="'.$donne["url"].'" alt="">
                             </div>
                             <div class="nom_date">
                                 <p class="nom">'.$donne["nom"].'</p>

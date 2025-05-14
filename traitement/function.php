@@ -8,10 +8,28 @@
        
     }
   }
+  //select un user
+  function selectUser($idMenbre,$db){
+     $sql=sprintf("SELECT * FROM menbre WHERE idMenbre=%d",$idMenbre);
+     return $statement=mysqli_query($db,$sql);
+  }
+  //select tout les pub d un user
+  function pubUser($idMenbre,$db){
+       $sql1=sprintf("SELECT idpublication, datePublication, description, menbre.nom ,menbre.idMenbre,menbre.url
+        FROM publication
+        join menbre
+        on publication.idMenbre=menbre.idMenbre WHERE menbre.idMenbre=%d
+        order by datePublication desc",$idMenbre);
+        return $SELECT=mysqli_query($db,$sql1);
+  }
+  
+
+  //select suggestion
   function selectAllUser($idMenbre,$db){
-      $sql=sprintf("SELECT idMenbre,nom,email FROM menbre WHERE idMenbre in (SELECT idMenbre FROM menbre WHERE idMenbre !='%d')
-     and idMenbre not in (SELECT   menbre.idMenbre FROM `amis` join menbre on menbre.idMenbre=amis.idMenbre
-                  WHERE monId='%d' AND dateAcceptation is NULL) ORDER BY RAND() LImit 10",$idMenbre,$idMenbre);
+      $sql=sprintf("SELECT * FROM menbre WHERE idMenbre!=5 AND idMenbre 
+          not in (SELECT monId FROM amis WHERE amis.idMenbre=%d
+          UNION
+          SELECt amis.idMenbre FROM amis WHERE monId=%d) ",$idMenbre,$idMenbre);
      return $statement=mysqli_query($db,$sql);
   }
 
@@ -20,8 +38,10 @@
     $statement=mysqli_query($db,$sql);
     return   $donnee=mysqli_fetch_assoc($statement);
   }
+
+  // maka ny pub rehetr
   function selectAllPub($db){
-    $sql1=sprintf("SELECT idpublication, datePublication, description, menbre.nom ,menbre.idMenbre
+    $sql1=sprintf("SELECT idpublication, datePublication, description, menbre.nom ,menbre.idMenbre,menbre.url
         FROM publication
         join menbre
         on publication.idMenbre=menbre.idMenbre
@@ -75,16 +95,16 @@
 
   //demande envoyer par d'autre user
   function invitation($monId,$db){
-    $sql=sprintf("SELECT  idMenbre,email,nom
+    $sql=sprintf("SELECT  *
                 FROM `menbre`
                 WHERE idMenbre
                 in(SELECT  monId FROM amis 
                 WHERE amis.idMenbre=%d AND dateAcceptation is  NULL)",$monId);
       return $statement=mysqli_query($db,$sql);
 }
-//
+//maka ny namana rehetra
   function selectMonAmis($monId,$db){
-      $sql=sprintf("SELECT `idMenbre`, `email`, `dateNaissonce`, `nom`, `mdp` FROM `menbre` WHERE idMenbre IN(SELECT  menbre.idMenbre 
+      $sql=sprintf("SELECT * FROM `menbre` WHERE idMenbre IN(SELECT  menbre.idMenbre 
                     FROM `amis` join menbre on menbre.idMenbre=amis.idMenbre
                     WHERE monId=%d AND dateAcceptation is not NULL
                     union 
@@ -103,8 +123,10 @@
     }
     return 0;
     }
+
+//demande envoyer par une autre user
   function selectSaDemande($idMenbre,$db){
-      $sql=sprintf("SELECT  monId , menbre.idMenbre ,menbre.nom, dateInvitation FROM `amis` join menbre on menbre.idMenbre=amis.idMenbre
+      $sql=sprintf("SELECT  monId , menbre.idMenbre ,menbre.nom, menbre.url, dateInvitation FROM `amis` join menbre on menbre.idMenbre=amis.idMenbre
               WHERE idMenbre='%d' AND dateAcceptation is NULL",$idMenbre);
       return $statement=mysqli_query($db,$sql);
   }

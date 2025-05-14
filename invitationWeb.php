@@ -21,8 +21,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/pub.css">
+     <link rel="stylesheet" href="css/discution.css">
     <link rel="stylesheet" href="css/amis.css">
-    <link rel="stylesheet" href="css/discution.css">
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
     <title>invitation</title>
 </head>
 <body>
@@ -35,19 +37,20 @@
               if($allAmis!=null){
                 while($donne3=mysqli_fetch_assoc($allAmis)){
                     echo' 
-                        <form action="invitationWeb.php" method="post" class="ItemSug1">
-                            <div class="imgAmi">
-                                <img src="photo\profil.png" alt="">
+                        <div class="card" id="cardStyle" style="width: 15rem;">
+                            <div class="imgContainer">
+                                <img src="'.$donne3["url"].'" class="card-img-top" alt="...">
+                            </div>  
+                            <div class="card-body">
+                                <form action="invitationWeb.php" method="post">
+                                    <h5 class="card-title">'.$donne3['nom'].'</h5>
+                                    <input type="hidden" name="idAmiAccepter" value="'.$donne3["idMenbre"].'">
+                                    <button type="submit" class="btn btn-primary" style="width:100%;">accepter</button><br>
+                                    <button type="submit" class="btn btn-danger" style="width:100%; margin-top:1vh;">suprimer</button> 
+                                </form> 
                             </div>
-                            <div class="demand">
-                                <h3>'.$donne3['nom'].'</h3>
-                                <p>'.$donne3['email'].'</p>
-                                <input type="hidden" name="idAmiAccepter" value="'.$donne3["idMenbre"].'">
-                                </div>
-                            <div>
-                                <button type="submit" class="annule">accepter</button>  
-                            </div>
-                        </form>';
+                        </div>
+                        ';
                             
                 }
             }else{
@@ -58,3 +61,4 @@
     </div> 
 </body>
 </html>
+
