@@ -1,6 +1,12 @@
 <div class="navBar">
        <div class="connexion">
-            <h1 class="user">user:<?php echo $nom?></h1>
+          <form action="profil.php" method="post" >
+               <button type="submit" style="border: none;">
+                    <h1 class="user">user:<a href="monProfil.php"><?php echo $nom?></a></h1>
+               </button>
+          </form>
+          
+            
        </div>
        <div class="navItem">
             <a href="publication.php"><img src="photo/home-blue.png" alt=""></a>

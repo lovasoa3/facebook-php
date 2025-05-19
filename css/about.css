@@ -12,6 +12,7 @@
     height:4vw;
     border-radius: 100%;
     background-color: black;
+    overflow: hidden;
 }
 .containerImg img{
     width: 100%;
@@ -36,3 +37,4 @@
     margin-left: 2vh;
 
 }
+

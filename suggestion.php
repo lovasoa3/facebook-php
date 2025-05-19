@@ -28,13 +28,13 @@ if($db){
     ?>
     <h1>suggestion</h1>
     <div class="container">
-        <div class="row row-cols-4">
+        <div class="row">
             <?php
             while($donne3=mysqli_fetch_assoc($select)){
                 $id=$donne3['idMenbre'];
                 $nbrPub=countPub($id,$db);
                 echo' 
-                    <div class="col">
+                    <div class="col-4">
                     <div class="card" id="cardStyle" style="width: 15rem;">
                             <div class="imgContainer">
                                 <img src="'.$donne3["url"].'" class="card-img-top" alt="...">
@@ -43,9 +43,8 @@ if($db){
                                 <form action="traitement/invitation.php" method="post">
                                     <h5 class="card-title">'.$donne3['nom'].'</h5>
                                     <p>'.$donne3['email'].'</p>
-                                    <input type="hidden" name="idAmiAccepter" value="'.$donne3["idMenbre"].'">
+                                    <input type="hidden" name="idAmi" value="'.$donne3["idMenbre"].'">
                                     <button type="submit" class="btn btn-primary" style="width:100%;">ajouter</button><br>
-                                   
                                 </form> 
                             </div>
                         </div>';

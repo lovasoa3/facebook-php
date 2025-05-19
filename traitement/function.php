@@ -26,10 +26,10 @@
 
   //select suggestion
   function selectAllUser($idMenbre,$db){
-      $sql=sprintf("SELECT * FROM menbre WHERE idMenbre!=5 AND idMenbre 
+      $sql=sprintf("SELECT * FROM menbre WHERE idMenbre!=%d AND idMenbre 
           not in (SELECT monId FROM amis WHERE amis.idMenbre=%d
           UNION
-          SELECt amis.idMenbre FROM amis WHERE monId=%d) ",$idMenbre,$idMenbre);
+          SELECt amis.idMenbre FROM amis WHERE monId=%d) ",$idMenbre,$idMenbre,$idMenbre);
      return $statement=mysqli_query($db,$sql);
   }
 
@@ -41,7 +41,7 @@
 
   // maka ny pub rehetr
   function selectAllPub($db){
-    $sql1=sprintf("SELECT idpublication, datePublication, description, menbre.nom ,menbre.idMenbre,menbre.url
+    $sql1=sprintf("SELECT *
         FROM publication
         join menbre
         on publication.idMenbre=menbre.idMenbre
@@ -78,7 +78,7 @@
       $insert=mysqli_query($db,$sql);
   }
   function selectMaDemande($idMenbre,$db){
-      $sql=sprintf("SELECT  monId , menbre.idMenbre ,menbre.nom, dateInvitation FROM `amis` join menbre on menbre.idMenbre=amis.idMenbre
+      $sql=sprintf("SELECT  monId , menbre.idMenbre ,menbre.nom ,menbre.url, dateInvitation FROM `amis` join menbre on menbre.idMenbre=amis.idMenbre
                   WHERE monId='%d' AND dateAcceptation is NULL",$idMenbre);
       return $statement=mysqli_query($db,$sql);
   }
@@ -117,11 +117,7 @@
   function countPub($idAmi, $db) {
     $sql = sprintf("SELECT COUNT(idMenbre) AS total FROM publication WHERE idMenbre = %d", $idAmi);
     $result = mysqli_query($db, $sql);
-    if ($result) {
-        $row = mysqli_fetch_assoc($result);
-        return $row['total'];
-    }
-    return 0;
+    return $result;
     }
 
 //demande envoyer par une autre user
@@ -167,8 +163,19 @@
     VALUES (%d,%d,now(),'%s','%s')",$monId,$idAmi,$sms,$room);
     $statement=mysqli_query($db,$sql);
   }
+
+  //insert nouveau image
+  function insertIMG($idMenbre,$url,$db){
+    $sql=sprintf("INSERT INTO `image`(`uriImage`, `dateIssertion`, `idUser`) VALUES ('%s',now(),%d)",$url,$idMenbre);
+    $statement=mysqli_query($db,$sql);
+  }
+
+  //update l image de user
+  function updateIMG($idMenbre,$url,$db){
+     $sql=sprintf("UPDATE `menbre` SET url='%s' WHERE idMenbre=%d",$url,$idMenbre);
+     $statement=mysqli_query($db,$sql);
+  }
+//upload sary
+
   
-
-
-
 ?>

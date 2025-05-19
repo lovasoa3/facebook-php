@@ -38,7 +38,10 @@ if(isset($_POST['chatSend'])  && isset($_POST['idDestination'])
     <form class="containerChat" action="message.php" method="post">
         <div class="nomAmi">
              <div class="imgAmi">
-                <img src="photo/profil.png" alt="">
+                <?php
+                    echo'<img src="'.$url.'" alt="">';
+                ?>
+                
              </div>
             <h3><?php echo $nomAmi?></h3>
         </div>
@@ -52,7 +55,7 @@ if(isset($_POST['chatSend'])  && isset($_POST['idDestination'])
                 }else{
                     echo' <div class="nomAmiChat">
                             <div class="imgAmi">
-                                <img src="photo/profil.png" alt="">
+                                <img src="'.$url.'" alt="">
                             </div>
                             <pre class="monChat">'.$donnee['sms'].'</pre>
                         </div>';

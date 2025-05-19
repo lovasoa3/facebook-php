@@ -54,6 +54,9 @@ $selectDemande=selectMaDemande($idActif,$db)
                 <button type="submit" id="btn">publier</button>
             </form>
         </div>
+       
+        
+        
     </section>
     <section class="listPub"> 
         <h1> toutes les publications</h1>
@@ -63,6 +66,9 @@ $selectDemande=selectMaDemande($idActif,$db)
             while($donne=mysqli_fetch_assoc($SELECT)){
                 echo' 
                     <div class="itemPub">
+                        <form action="profil.php" method="post">
+                         <input type="hidden" name="idAmi" value="'.$donne["idMenbre"].'">
+                        <button type="submit" style="border:none;">
                         <div class="itemAbout">
                             <div class="containerImg">
                                 <img src="'.$donne["url"].'" alt="">
@@ -72,6 +78,8 @@ $selectDemande=selectMaDemande($idActif,$db)
                                 <p class="date">'.$donne["datePublication"].'</p>
                             </div>
                         </div>
+                         </button>
+                        </form>
                         <div>
                             <pre class="pText">'.$donne["description"].'</pre>
                             <form action="traitement/insertCommentaire.php" method="post">
@@ -87,14 +95,14 @@ $selectDemande=selectMaDemande($idActif,$db)
     </section>
 
         <!--list -->
-        <section class="suggestion">
+        <section class="suggestion" style="">
     <?php
         while ($donne3 = mysqli_fetch_assoc($selectDemande)) {
             echo '
                 <form action="traitement/invitation.php" method="post" class="ItemSug1">
                     <div class="itemAbout">
                         <div class="containerImg">
-                            <img src="photo/profil.png" alt="">
+                            <img src="'.$donne3['url'].'" alt="">
                         </div>
                         <div class="nom_date">
                             <h3 class="nom">' . $donne3['nom'] . '</h3>

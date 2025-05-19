@@ -1,15 +1,21 @@
 <?php
 include("traitement/connectionDB.php");
 include("traitement/function.php");
+include("upload.php");
 session_start();
 include('traitement\sessionUser.php');
 $db = connectionDB();
-if(isset($_POST['idAmi']) && $_POST['idAmi']!=null){
-    $id=$_POST['idAmi'];
-    $donne3=mysqli_fetch_assoc(selectUser($id,$db));
-    $SELECT=pubUser($id,$db);
-    $countPub=mysqli_fetch_assoc(countPub($id,$db));
+$donne3=mysqli_fetch_assoc(selectUser($idActif,$db));
+$SELECT=pubUser($idActif,$db);
+$countPub=mysqli_fetch_assoc(countPub($idActif,$db));
+
+if(isset($_POST['idUser']) && $_POST['idUser']!=null){
+    updateIMG($idActif,uploadImg(),$db);
+    header("location:monProfil.php");
+    
 }
+   
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +24,7 @@ if(isset($_POST['idAmi']) && $_POST['idAmi']!=null){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/pub.css">
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
-     <link rel="stylesheet" href="css/pub.css">
+    <link rel="stylesheet" href="css/pub.css">
     <link rel="stylesheet" href="css/demande.css">
     <link rel="stylesheet" href="css/about.css">
     <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -28,17 +34,17 @@ if(isset($_POST['idAmi']) && $_POST['idAmi']!=null){
     <?php
     include('navbar.php');
     ?>
-    <div class="container">
-        <section class="h-100 gradient-custom-2">
+<div class="container">
+  <section class="h-100 gradient-custom-2">
   <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center">
       <div class="col col-lg-9 col-xl-8">
         <div class="card">
           <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
-            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
+            <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;height: 150px;">
                 <?php echo'<img src="'.$donne3["url"].'"
                 alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                style="width: 150px; z-index: 1">'?>
+                style="width: 100%;height: 100%;object-fit: cover; ">'?>
             </div>
             <div class="ms-3" style="margin-top: 130px;">
               <?php echo '<h5>'.$donne3['nom'].'</h5>'?>
@@ -50,6 +56,16 @@ if(isset($_POST['idAmi']) && $_POST['idAmi']!=null){
           </div>
           <div class="card-body p-4 text-black">
             <div class="mb-5  text-body">
+                   <form action="monProfil.php" method="post" enctype="multipart/form-data">
+                        <label for="fichier">changer de pdp:</label>
+                        <input type="file" name="fichier" id="fichier" required>
+                        <?php
+                            echo'
+                                <input type="hidden" name="idUser" value="'.$idActif.'">
+                                ';   
+                        ?>
+                        <input type="submit" value="changer">
+                    </form>
              
               <p class="lead fw-normal mb-1">A propos</p>
               <div class="p-4 bg-body-tertiary">
@@ -108,4 +124,3 @@ if(isset($_POST['idAmi']) && $_POST['idAmi']!=null){
     </div>
 </body>
 </html>
-

@@ -27,18 +27,20 @@
               if($allAmis!=null){
                 while($donne3=mysqli_fetch_assoc($allAmis)){
                     echo '
-                <form action="profil.php" method="post" class="ItemSug1">
-                    <div class="itemAbout">
+                <form action="profil.php" method="post" class="ItemSug1" style="border:1px solid red;width:50Vh;">
+                <button type="submit" class="apropos"  style="border:none;margin-top:1vh;">    
+                <div class="itemAbout">
                         <div class="containerImg">
                             <img src="'. $donne3['url'] . '" alt="">
                         </div>
                         <div class="nom_date">
-                            <button type="submit" class="apropos"><h3 class="nom">' . $donne3['nom'] . '</h3></button>
+                            <h3 class="nom">' . $donne3['nom'] . '</h3>
                         </div>
                     </div>
                     <div class="btnChoix">
                         <input type="hidden" name="idAmi" value="' . $donne3['idMenbre'] . '">
                     </div>
+                    </button>
                 </form>';
                             
                 }
