@@ -15,7 +15,7 @@
   }
   //select tout les pub d un user
   function pubUser($idMenbre,$db){
-       $sql1=sprintf("SELECT idpublication, datePublication, description, menbre.nom ,menbre.idMenbre,menbre.url
+       $sql1=sprintf("SELECT idpublication, datePublication, description,publication.urlImg, menbre.nom ,menbre.idMenbre,menbre.url
         FROM publication
         join menbre
         on publication.idMenbre=menbre.idMenbre WHERE menbre.idMenbre=%d
@@ -48,8 +48,8 @@
         order by datePublication desc");
         return $SELECT=mysqli_query($db,$sql1);
   }
-  function insertPub($text,$idMenbre,$db){
-        $sql=sprintf("INSERT INTO publication(description,idMenbre) VALUE('%s',%d)",$text,$idMenbre);
+  function insertPub($text,$idMenbre,$url,$db){
+        $sql=sprintf("INSERT INTO publication(description,idMenbre,urlImg) VALUE('%s',%d,'%s')",$text,$idMenbre,$url);
         $insertPub=mysqli_query($db,$sql);
   }
   function selectOnePub($idPub,$db){

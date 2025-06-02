@@ -1,6 +1,8 @@
 <?php
+include("upload.php");
 include("traitement/connectionDB.php");
 include("traitement/function.php");
+
 $db = connectionDB();
 session_start();
 if (isset($_SESSION['membre']) && !empty($_SESSION['membre'])) {
@@ -10,12 +12,17 @@ if (isset($_SESSION['membre']) && !empty($_SESSION['membre'])) {
         $email = $membre['email'];
         $idActif = $membre['idMenbre'];
         $nom =$membre['nom'];
+    }
         if (isset($_POST["textPub"]) && !empty($_POST["textPub"])) {
-            $text = $_POST['textPub'];
-            insertPub($text, $idActif, $db);
+            insertPub($_POST['textPub'], $idActif,null,$db);
+            header("location:publication.php");
+        }if(isset($_POST["textPub"]) && $_POST["textPub"]==null  && $_FILES['fichier']!=null){
+            insertPub($_POST['textPub'], $idActif,uploadImg(),$db);
+            header("location:publication.php");
+        }if(isset($_POST["textPub"]) && $_POST["textPub"]!=null && $_FILES['fichier']!=null){  
+            insertPub($_POST["textPub"], $idActif,uploadImg(),$db);
             header("location:publication.php");
         }
-    }
 } else {
     echo "Erreur : Aucun membre connecté. Veuillez vous connecter.";
 }
@@ -48,9 +55,9 @@ $selectDemande=selectMaDemande($idActif,$db)
             <h3 class="hPub">publier votre pub </h3>
         </div>
         <div class="container">
-            <form action="publication.php" method="post" class="containerForm">
-                <h1></h1>
+            <form action="publication.php" method="post" class="containerForm" enctype="multipart/form-data">
                 <textarea name="textPub" class="text" placeholder="publier"></textarea>
+                <input type="file" name="fichier" id="fichier" >
                 <button type="submit" id="btn">publier</button>
             </form>
         </div>
@@ -63,12 +70,12 @@ $selectDemande=selectMaDemande($idActif,$db)
         <?php
             $db=connectionDB();
             $SELECT=selectAllPub($db);
-            while($donne=mysqli_fetch_assoc($SELECT)){
-                echo' 
+                   while($donne=mysqli_fetch_assoc($SELECT)){
+                 echo' 
                     <div class="itemPub">
                         <form action="profil.php" method="post">
                          <input type="hidden" name="idAmi" value="'.$donne["idMenbre"].'">
-                        <button type="submit" style="border:none;">
+                        <button type="submit" style="border:none;heigth: 7vh;">
                         <div class="itemAbout">
                             <div class="containerImg">
                                 <img src="'.$donne["url"].'" alt="">
@@ -80,22 +87,29 @@ $selectDemande=selectMaDemande($idActif,$db)
                         </div>
                          </button>
                         </form>
-                        <div>
-                            <pre class="pText">'.$donne["description"].'</pre>
-                            <form action="traitement/insertCommentaire.php" method="post">
+                        <div>';
+                        if($donne["urlImg"]==null && $donne["description"]!=null){
+                            echo'<pre class="pText">'.$donne["description"].'</pre>';
+                        }if($donne["description"]==null && $donne["urlImg"]!=null){
+                            echo'<img src="'.$donne["urlImg"].'" alt="" style="heigth:50vh;">';
+                        }if($donne["urlImg"]!=null && $donne["description"]!=null){
+                            echo' <pre class="pText">'.$donne["description"].'</pre>
+                                  <img src="'.$donne["urlImg"].'" alt="">';
+                        }
+                        echo'<form action="traitement/insertCommentaire.php" method="post">
                                 <input type="hidden" name="idOnePub" value="'.$donne["idpublication"].'">
                                 <input type="hidden" name="nomPostPub" value="'.$donne["nom"].'">
                                 <button type="submit" id="voirPlus">voir plus</button>
                             </form>
                         </div>
                     </div>';
-            }       
+        }
 
         ?>
     </section>
 
         <!--list -->
-        <section class="suggestion" style="">
+        <section class="suggestion">
     <?php
         while ($donne3 = mysqli_fetch_assoc($selectDemande)) {
             echo '
@@ -117,7 +131,6 @@ $selectDemande=selectMaDemande($idActif,$db)
         }
     ?>
 </section>
-
 </div>
 </body>
 </html>

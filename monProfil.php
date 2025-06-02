@@ -90,9 +90,12 @@ if(isset($_POST['idUser']) && $_POST['idUser']!=null){
             <!-- les pu les user-->
             <div class="row g-2 d-flex justify-content-center">
                  <?php
-            while($donne=mysqli_fetch_assoc($SELECT)){
-                echo' 
+                  while($donne=mysqli_fetch_assoc($SELECT)){
+                 echo' 
                     <div class="itemPub">
+                        <form action="profil.php" method="post">
+                         <input type="hidden" name="idAmi" value="'.$donne["idMenbre"].'">
+                        <button type="submit" style="border:none;heigth: 7vh;">
                         <div class="itemAbout">
                             <div class="containerImg">
                                 <img src="'.$donne["url"].'" alt="">
@@ -102,16 +105,25 @@ if(isset($_POST['idUser']) && $_POST['idUser']!=null){
                                 <p class="date">'.$donne["datePublication"].'</p>
                             </div>
                         </div>
-                        <div>
-                            <pre class="pText">'.$donne["description"].'</pre>
-                            <form action="traitement/insertCommentaire.php" method="post">
+                         </button>
+                        </form>
+                        <div>';
+                        if($donne["urlImg"]==null && $donne["description"]!=null){
+                            echo'<pre class="pText" >'.$donne["description"].'</pre>';
+                        }if($donne["description"]==null && $donne["urlImg"]!=null){
+                            echo'<img src="'.$donne["urlImg"].'" alt="">';
+                        }if($donne["urlImg"]!=null && $donne["description"]!=null){
+                            echo' <pre class="pText" >'.$donne["description"].'</pre>
+                                  <img src="'.$donne["urlImg"].'" alt="">';
+                        }
+                        echo'<form action="traitement/insertCommentaire.php" method="post">
                                 <input type="hidden" name="idOnePub" value="'.$donne["idpublication"].'">
                                 <input type="hidden" name="nomPostPub" value="'.$donne["nom"].'">
                                 <button type="submit" id="voirPlus">voir plus</button>
                             </form>
                         </div>
                     </div>';
-            }       
+        }
 
         ?>
             </div>
